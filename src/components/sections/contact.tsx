@@ -41,20 +41,30 @@ export function ContactSection() {
     resolver: zodResolver(contactSchema)
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = (data: ContactFormData) => {
     setIsSubmitting(true);
 
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, CONTACT_CONSTANTS.FORM_TIMEOUT));
-      console.log("Form submitted:", data);
+      // Create mailto URL with form data
+      const subject = encodeURIComponent(`Contact Form Message from ${data.name}`);
+      const body = encodeURIComponent(
+        `Name: ${data.name}\n` +
+        `Email: ${data.email}\n\n` +
+        `Message:\n${data.message}`
+      );
+      
+      const mailtoUrl = `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
+      
+      // Open mailto link
+      window.location.href = mailtoUrl;
+      
       setSubmitSuccess(true);
       reset();
 
       // Reset success message after timeout
       setTimeout(() => setSubmitSuccess(false), CONTACT_CONSTANTS.SUCCESS_MESSAGE_TIMEOUT);
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error("Mailto error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -75,7 +85,7 @@ export function ContactSection() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/3 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="w-full max-w-full px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -195,7 +205,7 @@ export function ContactSection() {
                       animate={{ opacity: 1, y: 0 }}
                       className="text-center p-4 bg-green-100 text-green-800 rounded-lg border border-green-200"
                     >
-                      {t("successMessage")}
+                      {t("mailtoSuccessMessage")}
                     </motion.div>
                   )}
                 </form>

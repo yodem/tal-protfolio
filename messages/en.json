@@ -81,6 +81,7 @@
     "quickResponse": "Quick Response",
     "quickResponseText": "I typically respond to messages within 24 hours. For urgent projects, don't hesitate to call directly.",
     "successMessage": "Message sent successfully! I'll get back to you soon.",
+    "mailtoSuccessMessage": "Your email client should open with the message ready to send!",
     "validationName": "Name must be at least 2 characters",
     "validationEmail": "Please enter a valid email address",
     "validationMessage": "Message must be at least 10 characters"

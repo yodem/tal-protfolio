@@ -65,7 +65,7 @@ export function Navigation() {
       )}
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="container mx-auto px-4">
+      <div className="w-full max-w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div

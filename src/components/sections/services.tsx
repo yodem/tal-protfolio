@@ -43,7 +43,7 @@ export function ServicesSection() {
       )}
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="container mx-auto px-4">
+      <div className="w-full max-w-full px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
