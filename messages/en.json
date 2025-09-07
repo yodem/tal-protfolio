@@ -1,0 +1,104 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "works": "Works",
+    "services": "Services",
+    "contact": "Contact",
+    "collaborate": "Collaborate"
+  },
+  "hero": {
+    "title": "Tal Shimoni",
+    "subtitle": "Music Producer & Sound Designer",
+    "description": "Creating immersive audio experiences that connect with souls",
+    "collaborateButton": "Let's Collaborate"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I'm a passionate music producer and sound designer with over a decade of experience in creating unique audio landscapes. My journey in music production started with a simple curiosity about sound, which has evolved into a professional pursuit of audio excellence. I specialize in electronic music, ambient soundscapes, and cinematic compositions that tell stories through sound.",
+    "yearsExperience": "Years Experience",
+    "tracksProduced": "Tracks Produced",
+    "collaborations": "Collaborations"
+  },
+  "work": {
+    "title": "My Work",
+    "electronic": {
+      "primary": "Electronic Music",
+      "secondary": "Cutting-edge electronic compositions with innovative sound design"
+    },
+    "ambient": {
+      "primary": "Ambient Soundscapes",
+      "secondary": "Atmospheric and immersive audio environments"
+    },
+    "cinematic": {
+      "primary": "Cinematic Scoring",
+      "secondary": "Emotional and powerful scores for film and media"
+    },
+    "creativity": "Creativity",
+    "technicalSkill": "Technical Skill",
+    "explore": "Explore"
+  },
+  "tracks": {
+    "title": "Best Tracks",
+    "recentTitle": "Recent Tracks",
+    "latestRelease": "Latest Release",
+    "viewOnYoutube": "Listen Now",
+    "playTrack": "Play"
+  },
+  "services": {
+    "title": "Services",
+    "musicProduction": {
+      "title": "Music Production",
+      "description": "Full-scale music production from concept to final master"
+    },
+    "soundDesign": {
+      "title": "Sound Design",
+      "description": "Custom sound effects and audio branding solutions"
+    },
+    "mixing": {
+      "title": "Mixing & Mastering",
+      "description": "Professional mixing and mastering for your tracks"
+    },
+    "consultation": {
+      "title": "Audio Consultation",
+      "description": "Expert advice on audio production and sound strategy"
+    }
+  },
+  "contact": {
+    "title": "Let's Collaborate",
+    "subtitle": "Ready to create something amazing together? Let's discuss your project and bring your audio vision to life.",
+    "sendMessage": "Send a Message",
+    "send": "Send Message",
+    "name": "Full Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "namePlaceholder": "Enter your full name",
+    "emailPlaceholder": "Enter your email address",
+    "messagePlaceholder": "Tell me about your project...",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "locationLabel": "Location",
+    "quickResponse": "Quick Response",
+    "quickResponseText": "I typically respond to messages within 24 hours. For urgent projects, don't hesitate to call directly.",
+    "successMessage": "Message sent successfully! I'll get back to you soon.",
+    "validationName": "Name must be at least 2 characters",
+    "validationEmail": "Please enter a valid email address",
+    "validationMessage": "Message must be at least 10 characters"
+  },
+  "footer": {
+    "copyright": "© 2025 Tal Shimoni. All rights reserved.",
+    "socialMedia": "Follow me",
+    "quickLinks": "Quick Links",
+    "backToTop": "Back to Top",
+    "about": "About",
+    "works": "Works",
+    "services": "Services",
+    "contact": "Contact",
+    "brandDescription": "Creating immersive audio experiences that connect with souls.",
+    "brandName": "Tal Shimoni"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong"
+  }
+}

@@ -1,0 +1,599 @@
+---
+description: Comprehensive rules for Tal Shimoni's music producer portfolio - Next.js, TypeScript, Tailwind CSS, shadcn/ui with Hebrew/English i18n and dual theme support
+globs: ["*.ts", "*.tsx", "*.js", "*.jsx", "*.css", "*.scss", "*.json"]
+alwaysApply: true
+---
+
+# Tal Shimoni - Music Producer Portfolio - Cursor Rules
+
+## Project Overview
+This is a one-page Next.js portfolio for music producer Tal Shimoni, built with:
+- Next.js 15 + React 19
+- TypeScript (strict mode)
+- Tailwind CSS v4
+- shadcn/ui components
+- Lucide React icons
+- next-themes for dark/light mode
+- **Internationalization**: Hebrew & English support
+- **Dual Theme**: Light and dark mode with full coverage
+
+## Code Organization
+
+### File Structure
+```
+src/
+├── app/                    # Next.js app router
+│   ├── globals.css        # Global styles & CSS variables
+│   ├── layout.tsx         # Root layout with theme provider
+│   └── page.tsx           # Main portfolio page
+├── components/
+│   ├── globals/           # App-wide components (ThemeToggle, etc.)
+│   ├── ui/                # Reusable UI components (shadcn/ui)
+│   └── sections/          # Portfolio sections
+├── lib/
+│   ├── utils.ts           # Utility functions (cn, etc.)
+│   ├── i18n/              # Internationalization setup
+│   └── themes.ts          # Theme utilities
+└── messages/              # Translation files
+    ├── en.json            # English translations
+    └── he.json            # Hebrew translations
+```
+
+### Internationalization Structure
+```
+lib/i18n/
+├── config.ts              # i18n configuration
+├── request.ts             # Server-side locale handling
+└── client.ts              # Client-side locale handling
+
+messages/
+├── en.json                # English translations
+└── he.json                # Hebrew translations
+```
+
+## Internationalization (i18n) Guidelines
+
+### Translation Files Structure
+```json
+// messages/en.json
+{
+  "hero": {
+    "title": "Tal Shimoni",
+    "subtitle": "Music Producer & Sound Designer",
+    "description": "Creating immersive audio experiences"
+  },
+  "music": {
+    "tracks": "Tracks",
+    "play": "Play",
+    "pause": "Pause"
+  }
+}
+
+// messages/he.json
+{
+  "hero": {
+    "title": "טל שמעוני",
+    "subtitle": "מפיק מוזיקה ומעצב סאונד",
+    "description": "יצירת חוויות שמע סוחפות"
+  },
+  "music": {
+    "tracks": "רצועות",
+    "play": "נגן",
+    "pause": "השהה"
+  }
+}
+```
+
+### i18n Implementation
+```tsx
+// ✅ Good - Proper i18n usage
+"use client";
+
+import { useTranslations } from "next-intl";
+
+export function HeroSection() {
+  const t = useTranslations("hero");
+  
+  return (
+    <section className="hero-section text-center">
+      <h1 className="text-4xl font-bold">{t("title")}</h1>
+      <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
+      <p className="text-muted-foreground">{t("description")}</p>
+    </section>
+  );
+}
+```
+
+### RTL/LTR Support
+```tsx
+// ✅ Good - Direction-aware styling
+<div className="flex flex-col md:flex-row gap-6" dir={locale === "he" ? "rtl" : "ltr"}>
+  <div className="md:text-right">{/* Hebrew content */}</div>
+  <div className="md:text-left">{/* English content */}</div>
+</div>
+
+// CSS for RTL support
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+```
+
+### Locale-Specific Components
+```tsx
+// ✅ Good - Locale-aware component
+interface LocalizedButtonProps {
+  enLabel: string;
+  heLabel: string;
+  onClick: () => void;
+}
+
+export function LocalizedButton({ enLabel, heLabel, onClick }: LocalizedButtonProps) {
+  const locale = useLocale();
+  
+  return (
+    <Button onClick={onClick}>
+      {locale === "he" ? heLabel : enLabel}
+    </Button>
+  );
+}
+```
+
+## Dual Theme Guidelines
+
+### Theme-Aware Components
+```tsx
+// ✅ Good - Complete theme coverage
+export function MusicCard({ track }: MusicCardProps) {
+  return (
+    <Card className="bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground transition-colors">
+      <CardHeader>
+        <CardTitle className="text-foreground">{track.title}</CardTitle>
+        <CardDescription className="text-muted-foreground">
+          {track.artist}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="border-border hover:bg-accent hover:text-accent-foreground"
+          >
+            <Play className="h-4 w-4" />
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            {formatDuration(track.duration)}
+          </span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### CSS Variables for Themes
+```css
+/* ✅ Good - Comprehensive theme variables */
+:root {
+  /* Light theme */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+.dark {
+  /* Dark theme - complete coverage */
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}
+```
+
+### Theme Hook Usage
+```tsx
+// ✅ Good - Proper theme handling
+"use client";
+
+import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
+
+export function ThemeAwareSection() {
+  const { theme, setTheme } = useTheme();
+  const t = useTranslations("theme");
+  
+  return (
+    <section className="bg-background text-foreground">
+      <h2 className="text-primary">{t("currentTheme")}: {theme}</h2>
+      <Button 
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        className="bg-primary text-primary-foreground hover:bg-primary/90"
+      >
+        {t("toggleTheme")}
+      </Button>
+    </section>
+  );
+}
+```
+
+## Component Patterns
+
+### Bilingual Components
+```tsx
+// ✅ Good - Bilingual component with theme support
+interface BilingualHeroProps {
+  enContent: {
+    title: string;
+    subtitle: string;
+  };
+  heContent: {
+    title: string;
+    subtitle: string;
+  };
+}
+
+export function BilingualHero({ enContent, heContent }: BilingualHeroProps) {
+  const locale = useLocale();
+  const content = locale === "he" ? heContent : enContent;
+  
+  return (
+    <section className="hero-section bg-background text-foreground">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl md:text-6xl font-bold text-primary mb-4">
+          {content.title}
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground mb-8">
+          {content.subtitle}
+        </p>
+        <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
+          {locale === "he" ? "צור קשר" : "Contact Me"}
+        </Button>
+      </div>
+    </section>
+  );
+}
+```
+
+### Theme & Locale Context
+```tsx
+// ✅ Good - Combined theme and locale context
+"use client";
+
+import { useTheme } from "next-themes";
+import { useLocale } from "next-intl";
+
+export function useAppContext() {
+  const { theme, setTheme } = useTheme();
+  const locale = useLocale();
+  
+  const isRTL = locale === "he";
+  const direction = isRTL ? "rtl" : "ltr";
+  
+  return {
+    theme,
+    setTheme,
+    locale,
+    isRTL,
+    direction,
+    // Combined class names
+    containerClass: cn(
+      "bg-background text-foreground",
+      isRTL ? "rtl" : "ltr"
+    )
+  };
+}
+```
+
+## Naming Conventions
+
+### Files & Directories
+- Use `kebab-case` for files: `hero-section.tsx`, `music-player.tsx`
+- Use `PascalCase` for components: `HeroSection.tsx`, `MusicPlayer.tsx`
+- Use descriptive names: `TrackCard.tsx`, `ArtistBio.tsx`
+
+### Components & Functions
+- **Components**: `PascalCase` - `HeroSection`, `MusicPlayer`
+- **Functions**: `camelCase` - `playTrack`, `formatDuration`
+- **Hooks**: `camelCase` with `use` prefix - `useAudioPlayer`
+- **Types**: `PascalCase` - `Track`, `Artist`, `AudioState`
+
+### CSS Classes
+- Use Tailwind utility classes
+- Custom classes: `kebab-case` - `music-player`, `hero-section`
+- Component-specific: `track-card`, `artist-bio`
+
+## React Components
+```tsx
+// ✅ Good - Named export, TypeScript, clear structure
+interface HeroSectionProps {
+  title: string;
+  subtitle?: string;
+}
+
+export function HeroSection({ title, subtitle }: HeroSectionProps) {
+  return (
+    <section className="hero-section">
+      <h1 className="text-4xl font-bold">{title}</h1>
+      {subtitle && <p className="text-lg text-muted-foreground">{subtitle}</p>}
+    </section>
+  );
+}
+
+// ❌ Bad - Default export, missing types
+export default function hero({ title }) {
+  return <div>{title}</div>;
+}
+```
+
+## Styling Guidelines
+
+### Theme-Aware Utility Classes
+```tsx
+// ✅ Good - Theme-aware styling utilities
+const themeClasses = {
+  card: "bg-card text-card-foreground border-border",
+  button: "bg-primary text-primary-foreground hover:bg-primary/90",
+  input: "bg-input border-border text-foreground placeholder:text-muted-foreground",
+  text: {
+    primary: "text-foreground",
+    secondary: "text-muted-foreground",
+    accent: "text-accent-foreground"
+  },
+  background: {
+    primary: "bg-background",
+    secondary: "bg-secondary",
+    accent: "bg-accent"
+  }
+};
+
+// Usage
+<div className={themeClasses.card}>
+  <input className={themeClasses.input} />
+  <p className={themeClasses.text.secondary}>Description</p>
+</div>
+```
+
+### Responsive RTL/LTR Layouts
+```tsx
+// ✅ Good - Responsive bilingual layout
+export function ResponsiveSection() {
+  const { isRTL, containerClass } = useAppContext();
+  
+  return (
+    <section className={cn(containerClass, "py-16")}>
+      <div className="container mx-auto px-4">
+        <div className={cn(
+          "grid gap-8",
+          "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+          isRTL ? "md:grid-flow-col-dense" : ""
+        )}>
+          {/* Content items */}
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+## Import Organization
+
+### Import Order
+```tsx
+// 1. React imports
+import { useState, useEffect } from "react";
+
+// 2. Third-party libraries
+import { Play, Pause } from "lucide-react";
+
+// 3. Local components
+import { Button } from "@/components/ui/button";
+import { MusicPlayer } from "@/components/music/player";
+
+// 4. Utilities & hooks
+import { cn } from "@/lib/utils";
+import { useAudioPlayer } from "@/hooks/use-audio-player";
+
+// 5. Types
+import type { Track } from "@/types/music";
+```
+
+### Path Aliases
+- Use `@/` for all internal imports
+- Avoid relative imports like `../../../`
+- Keep imports clean and readable
+
+## Music-Specific Guidelines
+
+### Audio Components
+- Handle loading states for audio files
+- Provide accessibility features (ARIA labels)
+- Support keyboard navigation
+- Include error handling for audio failures
+
+### Portfolio Content
+```tsx
+// ✅ Good - Structured music data
+const TRACKS = [
+  {
+    id: "1",
+    title: "Ambient Dreams",
+    genre: "ambient",
+    duration: 245,
+    releaseDate: "2024-01-15",
+    description: "An ethereal journey through soundscapes",
+  },
+] as const;
+```
+
+## Accessibility (a11y) with i18n
+
+### ARIA Labels & Screen Readers
+```tsx
+// ✅ Good - Bilingual accessibility
+export function AccessibleAudioPlayer() {
+  const t = useTranslations("audio");
+  const { isRTL } = useAppContext();
+  
+  return (
+    <div role="region" aria-label={t("playerLabel")}>
+      <button
+        aria-label={t("playButton")}
+        className={cn(
+          "audio-control",
+          themeClasses.button
+        )}
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <Play className="h-5 w-5" />
+        <span className="sr-only">{t("playButton")}</span>
+      </button>
+    </div>
+  );
+}
+```
+
+### Keyboard Navigation
+```tsx
+// ✅ Good - RTL-aware keyboard navigation
+export function KeyboardNavigableMenu() {
+  const { isRTL } = useAppContext();
+  
+  return (
+    <nav 
+      role="navigation"
+      dir={isRTL ? "rtl" : "ltr"}
+      className="focus-within:outline focus-within:outline-2 focus-within:outline-ring"
+    >
+      {/* Navigation items with proper tab order */}
+    </nav>
+  );
+}
+```
+
+## Performance Best Practices
+
+### Image Optimization
+- Use Next.js `Image` component for all images
+- Optimize audio files (compress, proper formats)
+- Lazy load non-critical content
+- Use WebP format when possible
+
+### Bundle Optimization
+- Code-split music-related components
+- Use dynamic imports for heavy audio libraries
+- Minimize re-renders with proper memoization
+
+## Development Workflow
+
+### i18n & Theme Testing Checklist
+- [ ] Test all text appears in both languages
+- [ ] Verify RTL layout works correctly in Hebrew
+- [ ] Check theme switching preserves functionality
+- [ ] Ensure all interactive elements work in both themes
+- [ ] Test accessibility with screen readers in both languages
+- [ ] Verify responsive design in RTL layout
+
+### Component Development
+1. Create component with TypeScript interfaces
+2. Add proper styling with Tailwind
+3. Implement accessibility features
+4. Test across different screen sizes
+5. Add dark mode support
+
+### Content Updates
+1. Add translations to both `en.json` and `he.json`
+2. Update theme variables if needed
+3. Test component in both languages and themes
+4. Verify responsive behavior
+5. Check accessibility compliance
+
+## Git & Version Control
+
+### Commit Messages
+- Use conventional commits: `feat: add music player component`
+- Be descriptive: `feat: implement audio waveform visualization`
+- Group related changes
+
+### Branch Naming
+- Feature branches: `feature/audio-player-controls`
+- Bug fixes: `fix/audio-playback-issue`
+- Music content: `content/add-new-track-showcase`
+
+## Code Quality Standards
+
+### Linting & Formatting
+- Use ESLint with Next.js recommended rules
+- Enable TypeScript strict mode
+- Use Prettier for consistent formatting
+- Run type checking before commits
+
+### i18n Code Quality
+- Use translation keys consistently
+- Avoid hardcoded text in components
+- Test all translations are present
+- Handle pluralization properly
+- Support dynamic content in translations
+
+### Theme Code Quality
+- Every component must support both themes
+- Use semantic color tokens (primary, secondary, etc.)
+- Avoid hardcoded colors
+- Test theme switching thoroughly
+- Ensure proper contrast ratios in both themes
+
+## Deployment & Production
+
+### Build Optimization
+- Enable Next.js production optimizations
+- Compress audio files appropriately
+- Use CDN for static assets
+- Monitor bundle size
+
+### SEO Considerations
+- Add proper meta tags for music content
+- Include structured data for tracks/artists
+- Optimize for social media sharing
+- Ensure fast loading times
+
+### i18n Deployment
+- Configure proper URL structure for locales
+- Set up language detection middleware
+- Implement proper SEO for multilingual content
+- Configure CDN for translation files
+
+### Theme Deployment
+- Ensure CSS variables are properly minified
+- Test theme switching in production
+- Verify theme persistence works
+- Check for any CSS conflicts
+
+This Cursor rules file provides comprehensive guidelines for your music producer portfolio, ensuring every component works seamlessly in both Hebrew and English with full light and dark theme support. The rules cover component development, styling, internationalization, accessibility, performance, and deployment best practices specific to your bilingual, dual-theme project.
+```
+
+description:
+globs:
+alwaysApply: true
+---
