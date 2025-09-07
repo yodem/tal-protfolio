@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/sections/navigation";
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
-import { WorkSection } from "@/components/sections/work";
 import { BestTracksSection } from "@/components/sections/best-tracks";
 import { RecentTracksSection } from "@/components/sections/recent-tracks";
 import { ServicesSection } from "@/components/sections/services";
@@ -14,7 +13,6 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <AboutSection />
-      {/* <WorkSection /> */}
       <BestTracksSection />
       <RecentTracksSection />
       <ServicesSection />
