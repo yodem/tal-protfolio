@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Tal Shimoni - Music Producer Portfolio
 
 A modern, responsive portfolio website built with Next.js 15, featuring full internationalization (Hebrew/English) and dark/light themes.
@@ -222,3 +223,6 @@ NEXT_PUBLIC_YOUTUBE_API_KEY=your_youtube_api_key
 ---
 
 *Portfolio built with love for music and technology* 🎵
+=======
+# tal-protfolio
+>>>>>>> origin/main
