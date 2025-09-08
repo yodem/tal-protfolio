@@ -3,7 +3,7 @@ import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from "@/components/globals/theme-provider";
 import { routing } from '@/lib/i18n/config';
 import { notFound } from 'next/navigation';
-
+import { Analytics } from "@vercel/analytics/next"
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
 }
@@ -29,6 +29,7 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning dir={locale === 'he' ? 'rtl' : 'ltr'}>
       <head />
       <body>
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

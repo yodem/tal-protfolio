@@ -15,7 +15,7 @@ export function AboutSection() {
     <section 
       id="about" 
       className={cn(
-        "py-20 lg:py-32 bg-background",
+        "py-20 lg:py-24 bg-background",
         isRTL ? "rtl" : "ltr"
       )}
       dir={isRTL ? "rtl" : "ltr"}
@@ -95,29 +95,30 @@ export function AboutSection() {
               isRTL ? "lg:order-1" : "lg:order-2"
             )}
           >
-            <div className="relative">
-              {/* Rotating border */}
-              <motion.div
-                animate={{ rotate: ANIMATION_CONSTANTS.ROTATION_FULL }}
-                transition={{ duration: ABOUT_CONSTANTS.ROTATION_DURATION, repeat: Infinity, ease: "linear" }}
-                className="absolute rounded-full border-dashed border-primary/30"
-                style={{
-                  width: `${ABOUT_CONSTANTS.ROTATING_BORDER_SIZE}px`,
-                  height: `${ABOUT_CONSTANTS.ROTATING_BORDER_SIZE}px`,
-                  borderWidth: `${ABOUT_CONSTANTS.BORDER_WIDTH}px`,
-                  left: `-${(ABOUT_CONSTANTS.ROTATING_BORDER_SIZE - ABOUT_CONSTANTS.ROTATING_IMAGE_SIZE) / 2}px`,
-                  top: `-${(ABOUT_CONSTANTS.ROTATING_BORDER_SIZE - ABOUT_CONSTANTS.ROTATING_IMAGE_SIZE) / 2}px`
-                }}
-              />
-              
+            <div 
+              className="relative flex items-center justify-center w-80 h-80 lg:w-[450px] lg:h-[450px]"
+            >
               {/* Image container */}
               <motion.div
                 whileHover={{ scale: ANIMATION_CONSTANTS.SCALE_HOVER }}
-                transition={{ duration: ANIMATION_CONSTANTS.DURATION_FAST }}
-                className="relative w-72 h-72 rounded-full overflow-hidden border-4 border-primary shadow-2xl"
+                transition={{
+                  scale: { duration: ANIMATION_CONSTANTS.DURATION_FAST },
+                  boxShadow: {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    repeatType: "mirror",
+                  }
+                }}
+                animate={{
+                  boxShadow: [
+                    `0 0 15px 0px var(--primary-glow)`,
+                    `0 0 25px 5px var(--primary-glow)`,
+                    `0 0 15px 0px var(--primary-glow)`,
+                  ]
+                }}
+                className="relative w-full h-full rounded-full overflow-hidden border-4 border-primary"
                 style={{
-                  width: `${ABOUT_CONSTANTS.ROTATING_IMAGE_SIZE}px`,
-                  height: `${ABOUT_CONSTANTS.ROTATING_IMAGE_SIZE}px`,
                   borderWidth: `${ABOUT_CONSTANTS.BORDER_WIDTH}px`
                 }}
               >
@@ -135,7 +136,7 @@ export function AboutSection() {
               {/* Floating elements around image */}
               {[...Array(ABOUT_CONSTANTS.FLOATING_ELEMENTS_COUNT)].map((_, i) => (
                 <motion.div
-                  key={i}
+                  key={`float-${i}`}
                   className="absolute w-3 h-3 bg-primary/40 rounded-full"
                   style={{
                     left: `${50 + 45 * Math.cos((i * Math.PI * 2) / ABOUT_CONSTANTS.FLOATING_ELEMENTS_COUNT)}%`,
