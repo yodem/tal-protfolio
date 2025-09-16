@@ -78,6 +78,7 @@ export function ContactSection() {
         isRTL ? "rtl" : "ltr"
       )}
       dir={isRTL ? "rtl" : "ltr"}
+      aria-labelledby="contact-heading"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
@@ -94,7 +95,7 @@ export function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 id="contact-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {t("title")}
           </h2>
           <div className="w-20 h-1 bg-primary rounded-full mx-auto" />
@@ -118,7 +119,7 @@ export function ContactSection() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" role="form" aria-label="Contact form">
                   {/* Name Field */}
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-card-foreground">
@@ -132,9 +133,13 @@ export function ContactSection() {
                         "bg-background border-border",
                         errors.name && "border-destructive"
                       )}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      aria-invalid={errors.name ? "true" : "false"}
                     />
                     {errors.name && (
-                      <p className="text-sm text-destructive">{t("validationName")}</p>
+                      <p id="name-error" className="text-sm text-destructive" role="alert">
+                        {t("validationName")}
+                      </p>
                     )}
                   </div>
 
@@ -152,9 +157,13 @@ export function ContactSection() {
                         "bg-background border-border",
                         errors.email && "border-destructive"
                       )}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      aria-invalid={errors.email ? "true" : "false"}
                     />
                     {errors.email && (
-                      <p className="text-sm text-destructive">{t("validationEmail")}</p>
+                      <p id="email-error" className="text-sm text-destructive" role="alert">
+                        {t("validationEmail")}
+                      </p>
                     )}
                   </div>
 
@@ -172,9 +181,13 @@ export function ContactSection() {
                         "bg-background border-border resize-none",
                         errors.message && "border-destructive"
                       )}
+                      aria-describedby={errors.message ? "message-error" : undefined}
+                      aria-invalid={errors.message ? "true" : "false"}
                     />
                     {errors.message && (
-                      <p className="text-sm text-destructive">{t("validationMessage")}</p>
+                      <p id="message-error" className="text-sm text-destructive" role="alert">
+                        {t("validationMessage")}
+                      </p>
                     )}
                   </div>
 
@@ -183,16 +196,21 @@ export function ContactSection() {
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold"
+                    aria-describedby={isSubmitting ? "submit-status" : undefined}
                   >
                     {isSubmitting ? (
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full"
-                      />
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full"
+                          aria-hidden="true"
+                        />
+                        <span id="submit-status" className="sr-only">Submitting form...</span>
+                      </>
                     ) : (
                       <>
-                        <Send className="mr-2 h-5 w-5" />
+                        <Send className="mr-2 h-5 w-5" aria-hidden="true" />
                         {t("send")}
                       </>
                     )}
@@ -204,6 +222,8 @@ export function ContactSection() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-center p-4 bg-green-100 text-green-800 rounded-lg border border-green-200"
+                      role="alert"
+                      aria-live="polite"
                     >
                       {t("mailtoSuccessMessage")}
                     </motion.div>
@@ -226,34 +246,53 @@ export function ContactSection() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="flex items-center gap-4 p-6 bg-card rounded-xl border border-border shadow-lg"
+                role="region"
+                aria-label="Email contact information"
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center" aria-hidden="true">
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-card-foreground">{t("emailLabel")}</h3>
-                  <p className="text-muted-foreground">{CONTACT_INFO.email}</p>
+                  <a 
+                    href={`mailto:${CONTACT_INFO.email}`}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label={`Send email to ${CONTACT_INFO.email}`}
+                  >
+                    {CONTACT_INFO.email}
+                  </a>
                 </div>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="flex items-center gap-4 p-6 bg-card rounded-xl border border-border shadow-lg"
+                role="region"
+                aria-label="Phone contact information"
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center" aria-hidden="true">
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-card-foreground">{t("phoneLabel")}</h3>
-                  <p className="text-muted-foreground">{CONTACT_INFO.phone}</p>
+                  <a 
+                    href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}
+                    className="text-muted-foreground hover:text-primary transition-colors" 
+                    dir="ltr"
+                    aria-label={`Call ${CONTACT_INFO.phone}`}
+                  >
+                    {CONTACT_INFO.phone}
+                  </a>
                 </div>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="flex items-center gap-4 p-6 bg-card rounded-xl border border-border shadow-lg"
+                role="region"
+                aria-label="Location information"
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center" aria-hidden="true">
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <div>

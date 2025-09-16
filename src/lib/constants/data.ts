@@ -42,19 +42,19 @@ export const TRACKS = [
     id: 4,
     name: "את ואני",
     image: "/yarin-1.jpeg",
-    youtubeUrl: "https://li.sten.to/roieTrialanderror"
+    youtubeUrl: "https://musican.me/atia-ep"
   },
   {
     id: 5,
     name: "אוקטובר 23",
     image: "/yarin-2.jpeg",
-    youtubeUrl: "https://li.sten.to/roieTrialanderror"
+    youtubeUrl: "https://musican.me/atia-ep"
   },
   {
     id: 6,
-    name: "אני אנכי ועצמי",
-    image: "/yarin-3.jpeg",
-    youtubeUrl: "https://li.sten.to/roieTrialanderror"
+    name: "פורטפוליו ביטים",
+    image: "/tal_youtube.png",
+    youtubeUrl: "https://www.youtube.com/@TalType"
   }
 ] as const;
 

@@ -64,13 +64,21 @@ export function Navigation() {
         isRTL ? "rtl" : "ltr"
       )}
       dir={isRTL ? "rtl" : "ltr"}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="w-full max-w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div
+          <motion.a
+            href="#home"
             whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+            aria-label="Tal Shimoni - Go to homepage"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#home");
+            }}
           >
             <div className="flex items-center justify-center w-10 h-10 bg-primary rounded-full">
               <Image
@@ -85,7 +93,7 @@ export function Navigation() {
             <span className="text-xl font-bold text-foreground hidden sm:block">
               Tal Shimoni
             </span>
-          </motion.div>
+          </motion.a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex">
@@ -122,12 +130,14 @@ export function Navigation() {
               size="sm"
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle mobile menu"
+              aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5" aria-hidden="true" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-5 w-5" aria-hidden="true" />
               )}
             </Button>
           </div>
@@ -135,6 +145,7 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         <motion.div
+          id="mobile-menu"
           initial={false}
           animate={{
             height: isMobileMenuOpen ? "auto" : 0,
@@ -142,6 +153,8 @@ export function Navigation() {
           }}
           transition={{ duration: 0.3 }}
           className="md:hidden overflow-hidden bg-background/95 backdrop-blur-md border-t border-border"
+          role="menu"
+          aria-label="Mobile navigation menu"
         >
           <div className="py-4 space-y-2">
             {navigationItems.map((item) => (
@@ -153,6 +166,8 @@ export function Navigation() {
                   variant="ghost"
                   onClick={() => scrollToSection(item.href)}
                   className="w-full justify-start text-foreground hover:text-primary hover:bg-accent"
+                  role="menuitem"
+                  aria-label={`Navigate to ${t(item.key as any)} section`}
                 >
                   {t(item.key as any)}
                 </Button>

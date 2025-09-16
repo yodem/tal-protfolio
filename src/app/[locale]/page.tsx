@@ -9,15 +9,17 @@ import { Footer } from "@/components/sections/footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
       <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <BestTracksSection />
-      <RecentTracksSection />
-      <ServicesSection />
-      <ContactSection />
+      <main id="main-content" className="min-h-screen" role="main">
+        <HeroSection />
+        <AboutSection />
+        <BestTracksSection />
+        <RecentTracksSection />
+        <ServicesSection />
+        <ContactSection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

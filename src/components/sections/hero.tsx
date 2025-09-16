@@ -31,15 +31,17 @@ export function HeroSection() {
         isRTL ? "rtl" : "ltr"
       )}
       dir={isRTL ? "rtl" : "ltr"}
+      aria-label="Hero section - Tal Shimoni Music Producer"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/studio.jpeg"
-          alt="Hero background"
+          alt="Tal Shimoni's professional music studio with mixing equipment and instruments"
           fill
           className="object-cover"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-background/50 backdrop-blur-[4px]" />
       </div>
@@ -83,6 +85,7 @@ export function HeroSection() {
               size="lg"
               onClick={scrollToContact}
               className=" bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-6 text-xl font-bold rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 group transform hover:scale-105"
+              aria-label="Start collaboration with Tal Shimoni"
             >
               {isRTL ? (
                 <>
