@@ -126,7 +126,7 @@ export function AboutSection() {
                   src={`/tal.jpeg`}
                   alt="Tal Shimoni"
                   fill
-                  className="object-cover scale-125"
+                  className="object-cover scale-125 translate-y-[-25px]"
                 />
                 
                 {/* Overlay gradient */}
