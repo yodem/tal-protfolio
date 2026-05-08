@@ -40,10 +40,19 @@
   },
   "tracks": {
     "title": "Best Tracks",
-    "recentTitle": "Recent Tracks",
+    "recentTitle": "Recent Track",
     "latestRelease": "Latest Release",
     "viewOnYoutube": "Listen Now",
     "playTrack": "Play"
+  },
+  "projects": {
+    "track1": "Beats Portfolio",
+    "track2": "The Lowest",
+    "track3": "The Cure",
+    "track4": "Trial and Error",
+    "track5": "Love",
+    "track6": "Who is it?",
+    "track7": "Don't Understand"
   },
   "services": {
     "title": "Services",

@@ -20,51 +20,50 @@ export const SOCIAL_LINKS = [
 
 // Tracks data
 export const TRACKS = [
-  {
-    id: 1,
-    name: "מביט רחוק",
-    image: "/roy-1.jpeg",
-    youtubeUrl: "https://li.sten.to/roieTrialanderror"
-  },
-  {
-    id: 2,
-    name: "ניסוי ותהייה",
-    image: "/roy-2.jpeg",
-    youtubeUrl: "https://li.sten.to/roieTrialanderror"
-  },
-  {
-    id: 3,
-    name: "שלם",
-    image: "/roy-3.jpeg",
-    youtubeUrl: "https://li.sten.to/roieTrialanderror"
-  },
-  {
-    id: 4,
-    name: "את ואני",
-    image: "/yarin-1.jpeg",
-    youtubeUrl: "https://musican.me/atia-ep"
-  },
-  {
-    id: 5,
-    name: "אוקטובר 23",
-    image: "/yarin-2.jpeg",
-    youtubeUrl: "https://musican.me/atia-ep"
-  },
-  {
-    id: 6,
-    name: "פורטפוליו ביטים",
-    image: "/tal_youtube.png",
-    youtubeUrl: "https://www.youtube.com/@TalType"
-  }
+    {
+        id: 1,
+        nameKey: "track1",
+        image: "/tal_youtube.png",
+        youtubeUrl: "https://www.youtube.com/@TalType"
+    },
+    {
+        id: 2,
+        nameKey: "track2",
+        image: "/lowest.jpeg",
+        youtubeUrl: "https://distrokid.com/hyperfollow/shvmh1nx/V2ENkByzHVc/"
+    },
+    {
+        id: 3,
+        nameKey: "track3",
+        image: "/trufa.jpeg",
+        youtubeUrl: "https://li.sten.to/0y35mynn"
+    },
+    {
+        id: 4,
+        nameKey: "track4",
+        image: "/roy-2.jpeg",
+        youtubeUrl: "https://li.sten.to/roieTrialanderror"
+    },
+    {
+        id: 5,
+        nameKey: "track5",
+        image: "/ahava.jpeg",
+        youtubeUrl: "https://distrokid.com/hyperfollow/shvmh1nx/hl0k4rYbFav/"
+    },
+    {
+        id: 6,
+        nameKey: "track6",
+        image: "/yarin-1.jpeg",
+        youtubeUrl: "https://musican.me/atia-ep"
+    }
 ] as const;
 
-export const RECENT_TRACK = 
-  {
+export const RECENT_TRACK = { // Use { because it's one single object
     id: 7,
-    name: "אהבה",
+    nameKey: "track7",
     image: "/latest.jpeg",
-    youtubeUrl: "https://distrokid.com/hyperfollow/shvmh1nx/hl0k4rYbFav/"
-  } as const;
+    youtubeUrl: "https://distrokid.com/hyperfollow/shvmh1nx/EGIlMlFOgDU/"
+};
 // Quick links for footer
 export const QUICK_LINKS = [
   { name: "about", href: "#about" },

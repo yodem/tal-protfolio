@@ -23,9 +23,18 @@
   "tracks": {
     "title": "עבודות",
     "recentTitle": "עבודה אחרונה",
-    "latestRelease": "השחרור האחרון",
+    "latestRelease": "עבודה אחרונה",
     "viewOnYoutube": "האזן עכשיו",
     "playTrack": "נגן"
+  },
+  "projects": {
+    "track1": "פורטפוליו ביטים",
+    "track2": "הכי נמוך",
+    "track3": "התרופה",
+    "track4": "ניסוי ותהייה",
+    "track5": "אהבה",
+    "track6": "מי זה?",
+    "track7": "לא מבין"
   },
   "work": {
     "title": "העבודות שלי",
